@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EMS — Employee Management System</title>
+  <meta name="description" content="A modern Employee Management System for tracking staff, shifts, tasks, leaves and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <span class="logo-text">EMS Pro</span>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">MAIN</div>
+      <ul class="nav-list">
+        <li><a href="#" class="nav-item active" data-page="dashboard" id="nav-dashboard">
+          <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+          <span class="nav-label">Dashboard</span>
+        </a></li>
+        <li><a href="#" class="nav-item" data-page="directory" id="nav-directory">
+          <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+          <span class="nav-label">Directory</span>
+        </a></li>
+        <li><a href="#" class="nav-item" data-page="tasks" id="nav-tasks">
+          <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+          <span class="nav-label">Tasks</span>
+          <span class="nav-badge" id="taskBadge">5</span>
+        </a></li>
+        <li><a href="#" class="nav-item" data-page="leave" id="nav-leave">
+          <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="16" x2="9.01" y2="16"/></svg></span>
+          <span class="nav-label">Leave</span>
+        </a></li>
+        <li><a href="#" class="nav-item" data-page="shifts" id="nav-shifts">
+          <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span class="nav-label">Shifts</span>
+        </a></li>
+      </ul>
+      <div class="nav-section-label">MANAGEMENT</div>
+      <ul class="nav-list">
+        <li><a href="#" class="nav-item" data-page="departments" id="nav-departments">
+          <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+          <span class="nav-label">Departments</span>
+        </a></li>
+        <li><a href="#" class="nav-item" data-page="reports" id="nav-reports">
+          <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+          <span class="nav-label">Reports</span>
+        </a></li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-avatar" id="sidebarUserAvatar">N</div>
+        <div class="user-info">
+          <div class="user-name" id="sidebarUserName">Neel</div>
+          <div class="user-role" id="sidebarUserRole">Admin</div>
+        </div>
+        <button class="settings-btn" title="Settings">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content" id="mainContent">
+    <!-- TOP BAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="page-breadcrumb">
+          <span class="breadcrumb-parent">EMS Pro</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <span class="breadcrumb-current" id="currentPageTitle">Dashboard</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-wrapper" id="globalSearchWrapper">
+          <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="search-input" id="globalSearch" placeholder="Search employees, tasks…" autocomplete="off" />
+          <div class="search-dropdown" id="searchDropdown"></div>
+        </div>
+        <!-- Dark Mode Toggle -->
+        <button class="icon-btn dark-toggle" id="darkToggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon hidden" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <!-- Notifications -->
+        <div class="notif-wrapper">
+          <button class="icon-btn notification-btn" id="notificationBtn" aria-label="Notifications">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="notif-dot" id="notifDot"></span>
+          </button>
+          <div class="notif-panel" id="notifPanel">
+            <div class="notif-panel-header">
+              <span class="notif-panel-title">Notifications</span>
+              <button class="notif-clear" id="clearNotifs">Clear all</button>
+            </div>
+            <div class="notif-list" id="notifList"></div>
+          </div>
+        </div>
+        <div class="topbar-user-avatar" id="topbarAvatar">N</div>
+      </div>
+    </header>
+
+    <!-- PAGES -->
+    <div class="page-wrapper">
+
+      <!-- =================== DASHBOARD PAGE =================== -->
+      <section class="page active" id="page-dashboard">
+        <div class="page-header">
+          <div>
+            <p class="page-subtitle">WELCOME BACK, NEEL</p>
+            <h1 class="page-title">Good Morning. 👋</h1>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addEmployeeBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Employee
+            </button>
+          </div>
+        </div>
+
+        <!-- STAT CARDS -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--blue">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value" id="statTotalEmployees">24</div>
+              <div class="stat-label">Total Employees</div>
+            </div>
+            <div class="stat-change positive">+2 this month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--teal">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value" id="statActiveShifts">18</div>
+              <div class="stat-label">Active Shifts</div>
+            </div>
+            <div class="stat-change positive">Active now</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--orange">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value" id="statPendingTasks">12</div>
+              <div class="stat-label">Pending Tasks</div>
+            </div>
+            <div class="stat-change warning">3 overdue</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--green">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value" id="statLeaveRequests">4</div>
+              <div class="stat-label">Leave Requests</div>
+            </div>
+            <div class="stat-change warning">Pending review</div>
+          </div>
+        </div>
+
+        <!-- DASHBOARD GRID -->
+        <div class="dashboard-grid">
+          <!-- Shift Timer Card -->
+          <div class="card shift-timer-card">
+            <div class="card-label">SHIFT TIMER</div>
+            <div class="shift-timer-content">
+              <div class="timer-display" id="timerDisplay">00:00:00</div>
+              <button class="btn btn-clock" id="clockBtn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                Clock In
+              </button>
+            </div>
+          </div>
+
+          <!-- Current Shift Details -->
+          <div class="card shift-details-card">
+            <div class="card-header-row">
+              <div class="card-title">Current Shift Details</div>
+              <span class="badge badge--active" id="shiftStatusBadge">INACTIVE</span>
+            </div>
+            <div class="card-label mt-12">LOCATION &amp; ROLE</div>
+            <div class="detail-list">
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <div class="detail-primary">Downtown HQ</div>
+                  <div class="detail-secondary">Senior Curator – Floor 4</div>
+                </div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div>
+                  <div class="detail-primary">Lead Supervisor</div>
+                  <div class="detail-secondary teal">Reporting to Sarah Jenkins</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Break -->
+          <div class="card break-card">
+            <div class="card-label">UPCOMING BREAK</div>
+            <div class="break-time">12:30 PM</div>
+            <div class="break-duration">30 min scheduled break</div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="card activity-card">
+            <div class="card-title">Recent Activity</div>
+            <div class="activity-list" id="activityList">
+              <div class="activity-item">
+                <div class="activity-dot dot-blue"></div>
+                <div class="activity-content">
+                  <div class="activity-text">Sarah J. clocked in</div>
+                  <div class="activity-time">2 min ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot dot-teal"></div>
+                <div class="activity-content">
+                  <div class="activity-text">Task "Q2 Report" completed</div>
+                  <div class="activity-time">15 min ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot dot-orange"></div>
+                <div class="activity-content">
+                  <div class="activity-text">Leave request from Alex M.</div>
+                  <div class="activity-time">1 hr ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot dot-green"></div>
+                <div class="activity-content">
+                  <div class="activity-text">New employee David K. added</div>
+                  <div class="activity-time">3 hrs ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EMPLOYEES TABLE PREVIEW -->
+        <div class="card table-card">
+          <div class="table-card-header">
+            <div class="card-title">Employee Overview</div>
+            <button class="btn btn-ghost" data-page="directory">View All →</button>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" id="dashboardEmployeeTable">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Department</th>
+                  <th>Role</th>
+                  <th>Status</th>
+                  <th>Tasks</th>
+                </tr>
+              </thead>
+              <tbody id="dashboardEmployeeTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================== DIRECTORY PAGE =================== -->
+      <section class="page" id="page-directory">
+        <div class="page-header">
+          <div>
+            <p class="page-subtitle">TEAM MEMBERS</p>
+            <h1 class="page-title">Employee Directory</h1>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-outline" id="exportBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export
+            </button>
+            <button class="btn btn-primary" id="addEmployeeBtn2">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Employee
+            </button>
+          </div>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="filter-bar card">
+          <div class="filter-group">
+            <div class="input-wrapper">
+              <svg class="input-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" class="form-input has-icon" id="empSearch" placeholder="Search by name, email…" />
+            </div>
+          </div>
+          <div class="filter-group">
+            <select class="form-select" id="deptFilter">
+              <option value="">All Departments</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <select class="form-select" id="statusFilter">
+              <option value="">All Status</option>
+              <option value="Active">Active</option>
+              <option value="On Leave">On Leave</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <select class="form-select" id="roleFilter">
+              <option value="">All Roles</option>
+              <option value="Admin">Admin</option>
+              <option value="Manager">Manager</option>
+              <option value="Employee">Employee</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- EMPLOYEES TABLE -->
+        <div class="card table-card">
+          <div class="table-wrapper">
+            <table class="data-table" id="directoryTable">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Department</th>
+                  <th>Role</th>
+                  <th>Hire Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="directoryTbody"></tbody>
+            </table>
+          </div>
+          <div class="table-footer">
+            <span class="table-count" id="directoryCount">Showing 0 employees</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================== TASKS PAGE =================== -->
+      <section class="page" id="page-tasks">
+        <div class="page-header">
+          <div>
+            <p class="page-subtitle">WORK MANAGEMENT</p>
+            <h1 class="page-title">Tasks</h1>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addTaskBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              New Task
+            </button>
+          </div>
+        </div>
+
+        <!-- TASK FILTERS -->
+        <div class="filter-bar card">
+          <div class="filter-group">
+            <div class="input-wrapper">
+              <svg class="input-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" class="form-input has-icon" id="taskSearch" placeholder="Search tasks…" />
+            </div>
+          </div>
+          <div class="filter-group">
+            <select class="form-select" id="taskStatusFilter">
+              <option value="">All Status</option>
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <select class="form-select" id="taskPriorityFilter">
+              <option value="">All Priority</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <select class="form-select" id="taskAssigneeFilter">
+              <option value="">All Assignees</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- TASK KANBAN VIEW TOGGLE -->
+        <div class="view-toggle">
+          <button class="view-btn active" id="listViewBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            List
+          </button>
+          <button class="view-btn" id="kanbanViewBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="10" rx="1"/></svg>
+            Kanban
+          </button>
+        </div>
+
+        <!-- LIST VIEW -->
+        <div id="taskListView" class="card table-card">
+          <div class="table-wrapper">
+            <table class="data-table" id="tasksTable">
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Assignee</th>
+                  <th>Due Date</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="tasksTbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- KANBAN VIEW -->
+        <div id="taskKanbanView" class="kanban-board hidden">
+          <div class="kanban-col">
+            <div class="kanban-col-header">
+              <span class="kanban-col-dot dot-orange"></span>
+              <span class="kanban-col-title">Pending</span>
+              <span class="kanban-col-count" id="pendingCount">0</span>
+            </div>
+            <div class="kanban-cards" id="kanban-Pending"></div>
+          </div>
+          <div class="kanban-col">
+            <div class="kanban-col-header">
+              <span class="kanban-col-dot dot-blue"></span>
+              <span class="kanban-col-title">In Progress</span>
+              <span class="kanban-col-count" id="inProgressCount">0</span>
+            </div>
+            <div class="kanban-cards" id="kanban-In Progress"></div>
+          </div>
+          <div class="kanban-col">
+            <div class="kanban-col-header">
+              <span class="kanban-col-dot dot-green"></span>
+              <span class="kanban-col-title">Completed</span>
+              <span class="kanban-col-count" id="completedCount">0</span>
+            </div>
+            <div class="kanban-cards" id="kanban-Completed"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================== LEAVE PAGE =================== -->
+      <section class="page" id="page-leave">
+        <div class="page-header">
+          <div>
+            <p class="page-subtitle">ABSENCE MANAGEMENT</p>
+            <h1 class="page-title">Leave Requests</h1>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addLeaveBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              New Request
+            </button>
+          </div>
+        </div>
+
+        <div class="stats-grid compact">
+          <div class="stat-card mini">
+            <div class="stat-value-mini" id="statPendingLeave">4</div>
+            <div class="stat-label">Pending</div>
+          </div>
+          <div class="stat-card mini">
+            <div class="stat-value-mini" id="statApprovedLeave">12</div>
+            <div class="stat-label">Approved</div>
+          </div>
+          <div class="stat-card mini">
+            <div class="stat-value-mini" id="statRejectedLeave">2</div>
+            <div class="stat-label">Rejected</div>
+          </div>
+        </div>
+
+        <div class="card table-card">
+          <div class="table-wrapper">
+            <table class="data-table" id="leaveTable">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Type</th>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Days</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="leaveTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================== SHIFTS PAGE =================== -->
+      <section class="page" id="page-shifts">
+        <div class="page-header">
+          <div>
+            <p class="page-subtitle">WORKFORCE SCHEDULE</p>
+            <h1 class="page-title">Shift Management</h1>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addShiftBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Shift
+            </button>
+          </div>
+        </div>
+        <div class="card table-card">
+          <div class="table-wrapper">
+            <table class="data-table" id="shiftsTable">
+              <thead>
+                <tr>
+                  <th>Employee</th>
+                  <th>Date</th>
+                  <th>Clock In</th>
+                  <th>Clock Out</th>
+                  <th>Hours</th>
+                  <th>Location</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="shiftsTbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================== DEPARTMENTS PAGE =================== -->
+      <section class="page" id="page-departments">
+        <div class="page-header">
+          <div>
+            <p class="page-subtitle">ORGANIZATION</p>
+            <h1 class="page-title">Departments</h1>
+          </div>
+          <div class="header-actions">
+            <button class="btn btn-primary" id="addDeptBtn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Department
+            </button>
+          </div>
+        </div>
+        <div class="dept-grid" id="deptGrid"></div>
+      </section>
+
+      <!-- =================== REPORTS PAGE =================== -->
+      <section class="page" id="page-reports">
+        <div class="page-header">
+          <div>
+            <p class="page-subtitle">ANALYTICS</p>
+            <h1 class="page-title">Reports</h1>
+          </div>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--blue">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">94%</div>
+              <div class="stat-label">Attendance Rate</div>
+            </div>
+            <div class="stat-change positive">+2% from last month</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--teal">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">78%</div>
+              <div class="stat-label">Task Completion Rate</div>
+            </div>
+            <div class="stat-change positive">On track</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--orange">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">8.2 hrs</div>
+              <div class="stat-label">Avg Hours/Day</div>
+            </div>
+            <div class="stat-change warning">-0.3 from last week</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon--green">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">4.7/5</div>
+              <div class="stat-label">Employee Satisfaction</div>
+            </div>
+            <div class="stat-change positive">Excellent</div>
+          </div>
+        </div>
+
+        <!-- Charts placeholder -->
+        <div class="dashboard-grid">
+          <div class="card chart-card span-2">
+            <div class="card-title">Department Distribution</div>
+            <div class="chart-container" id="deptChart"></div>
+          </div>
+          <div class="card chart-card">
+            <div class="card-title">Task Status Overview</div>
+            <div class="chart-container" id="taskChart"></div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- end page-wrapper -->
+  </main>
+
+  <!-- ========= EMPLOYEE PROFILE SIDE PANEL ========= -->
+  <div class="profile-panel-overlay" id="profilePanelOverlay"></div>
+  <aside class="profile-panel" id="profilePanel">
+    <div class="profile-panel-header">
+      <h2 class="profile-panel-title">Employee Profile</h2>
+      <button class="modal-close" id="closeProfilePanel" aria-label="Close profile">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="profile-panel-body">
+      <!-- Hero -->
+      <div class="profile-hero">
+        <div class="profile-avatar-lg" id="profileAvatarLg">MW</div>
+        <div class="profile-hero-info">
+          <div class="profile-name" id="profileName">Marcus Webb</div>
+          <div class="profile-position" id="profilePosition">CTO · Engineering</div>
+          <div id="profileStatusBadge"></div>
+        </div>
+        <div class="profile-hero-actions">
+          <button class="btn btn-primary btn-sm" id="profileEditBtn">Edit</button>
+        </div>
+      </div>
+      <!-- Info Grid -->
+      <div class="profile-info-grid">
+        <div class="profile-info-item">
+          <div class="profile-info-label">Email</div>
+          <div class="profile-info-value" id="profileEmail">—</div>
+        </div>
+        <div class="profile-info-item">
+          <div class="profile-info-label">Phone</div>
+          <div class="profile-info-value" id="profilePhone">—</div>
+        </div>
+        <div class="profile-info-item">
+          <div class="profile-info-label">Hire Date</div>
+          <div class="profile-info-value" id="profileHireDate">—</div>
+        </div>
+        <div class="profile-info-item">
+          <div class="profile-info-label">Role</div>
+          <div class="profile-info-value" id="profileRole">—</div>
+        </div>
+        <div class="profile-info-item">
+          <div class="profile-info-label">Supervisor</div>
+          <div class="profile-info-value" id="profileSupervisor">—</div>
+        </div>
+        <div class="profile-info-item">
+          <div class="profile-info-label">Salary</div>
+          <div class="profile-info-value" id="profileSalary">—</div>
+        </div>
+      </div>
+      <!-- Task Progress -->
+      <div class="profile-section">
+        <div class="profile-section-title">Tasks</div>
+        <div class="profile-task-stats" id="profileTaskStats"></div>
+        <div class="profile-task-list" id="profileTaskList"></div>
+      </div>
+      <!-- Leave History -->
+      <div class="profile-section">
+        <div class="profile-section-title">Leave History</div>
+        <div class="profile-leave-list" id="profileLeaveList"></div>
+      </div>
+      <!-- Recent Shifts -->
+      <div class="profile-section">
+        <div class="profile-section-title">Recent Shifts</div>
+        <div class="profile-shift-list" id="profileShiftList"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =================== MODALS =================== -->
+
+  <!-- ADD/EDIT EMPLOYEE MODAL -->
+  <div class="modal-overlay" id="employeeModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="employeeModalTitle">Add Employee</h2>
+        <button class="modal-close" data-close="employeeModal" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="employeeForm" novalidate>
+          <input type="hidden" id="empId" />
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="empName">Full Name *</label>
+              <input type="text" class="form-input" id="empName" placeholder="John Doe" required />
+              <span class="form-error" id="empNameError"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="empEmail">Email *</label>
+              <input type="email" class="form-input" id="empEmail" placeholder="john@example.com" required />
+              <span class="form-error" id="empEmailError"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="empPhone">Phone</label>
+              <input type="tel" class="form-input" id="empPhone" placeholder="+1 (555) 000-0000" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="empDept">Department *</label>
+              <select class="form-select" id="empDept" required>
+                <option value="">Select department</option>
+              </select>
+              <span class="form-error" id="empDeptError"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="empRole">Role *</label>
+              <select class="form-select" id="empRole" required>
+                <option value="">Select role</option>
+                <option value="Admin">Admin</option>
+                <option value="Manager">Manager</option>
+                <option value="Employee">Employee</option>
+              </select>
+              <span class="form-error" id="empRoleError"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="empPosition">Position</label>
+              <input type="text" class="form-input" id="empPosition" placeholder="e.g. Senior Developer" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="empHireDate">Hire Date</label>
+              <input type="date" class="form-input" id="empHireDate" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="empStatus">Status</label>
+              <select class="form-select" id="empStatus">
+                <option value="Active">Active</option>
+                <option value="On Leave">On Leave</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="empSupervisor">Supervisor</label>
+              <select class="form-select" id="empSupervisor">
+                <option value="">None</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="empSalary">Salary (USD)</label>
+              <input type="number" class="form-input" id="empSalary" placeholder="60000" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="employeeModal">Cancel</button>
+        <button class="btn btn-primary" id="saveEmployeeBtn">Save Employee</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD/EDIT TASK MODAL -->
+  <div class="modal-overlay" id="taskModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="taskModalTitle">New Task</h2>
+        <button class="modal-close" data-close="taskModal" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="taskForm" novalidate>
+          <input type="hidden" id="taskId" />
+          <div class="form-group">
+            <label class="form-label" for="taskTitle">Task Title *</label>
+            <input type="text" class="form-input" id="taskTitle" placeholder="Enter task title" required />
+            <span class="form-error" id="taskTitleError"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="taskDesc">Description</label>
+            <textarea class="form-textarea" id="taskDesc" rows="3" placeholder="Describe the task…"></textarea>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="taskAssignee">Assignee *</label>
+              <select class="form-select" id="taskAssignee" required>
+                <option value="">Select employee</option>
+              </select>
+              <span class="form-error" id="taskAssigneeError"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="taskDueDate">Due Date *</label>
+              <input type="date" class="form-input" id="taskDueDate" required />
+              <span class="form-error" id="taskDueDateError"></span>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="taskPriority">Priority</label>
+              <select class="form-select" id="taskPriority">
+                <option value="Low">Low</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="taskStatus">Status</label>
+              <select class="form-select" id="taskStatus">
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="taskModal">Cancel</button>
+        <button class="btn btn-primary" id="saveTaskBtn">Save Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD LEAVE MODAL -->
+  <div class="modal-overlay" id="leaveModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="leaveModalTitle">New Leave Request</h2>
+        <button class="modal-close" data-close="leaveModal" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="leaveForm" novalidate>
+          <input type="hidden" id="leaveId" />
+          <div class="form-group">
+            <label class="form-label" for="leaveEmployee">Employee *</label>
+            <select class="form-select" id="leaveEmployee" required>
+              <option value="">Select employee</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="leaveType">Leave Type</label>
+            <select class="form-select" id="leaveType">
+              <option value="Annual">Annual</option>
+              <option value="Sick">Sick</option>
+              <option value="Personal">Personal</option>
+              <option value="Unpaid">Unpaid</option>
+            </select>
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="leaveFrom">From *</label>
+              <input type="date" class="form-input" id="leaveFrom" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="leaveTo">To *</label>
+              <input type="date" class="form-input" id="leaveTo" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="leaveReason">Reason</label>
+            <textarea class="form-textarea" id="leaveReason" rows="3" placeholder="Reason for leave…"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="leaveModal">Cancel</button>
+        <button class="btn btn-primary" id="saveLeaveBtn">Submit Request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD DEPARTMENT MODAL -->
+  <div class="modal-overlay" id="deptModal">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2 class="modal-title" id="deptModalTitle">Add Department</h2>
+        <button class="modal-close" data-close="deptModal" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="deptForm">
+          <input type="hidden" id="deptId" />
+          <div class="form-group">
+            <label class="form-label" for="deptName">Department Name *</label>
+            <input type="text" class="form-input" id="deptName" placeholder="e.g. Engineering" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="deptHead">Department Head</label>
+            <select class="form-select" id="deptHead">
+              <option value="">None</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="deptColor">Color</label>
+            <input type="color" class="form-input color-input" id="deptColor" value="#1a5276" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="deptModal">Cancel</button>
+        <button class="btn btn-primary" id="saveDeptBtn">Save Department</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD SHIFT MODAL -->
+  <div class="modal-overlay" id="shiftModal">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2 class="modal-title">Log Shift</h2>
+        <button class="modal-close" data-close="shiftModal" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="shiftForm">
+          <div class="form-group">
+            <label class="form-label" for="shiftEmployee">Employee *</label>
+            <select class="form-select" id="shiftEmployee" required>
+              <option value="">Select employee</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="shiftDate">Date *</label>
+            <input type="date" class="form-input" id="shiftDate" required />
+          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="shiftIn">Clock In *</label>
+              <input type="time" class="form-input" id="shiftIn" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="shiftOut">Clock Out</label>
+              <input type="time" class="form-input" id="shiftOut" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="shiftLocation">Location</label>
+            <input type="text" class="form-input" id="shiftLocation" placeholder="e.g. Downtown HQ" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="shiftModal">Cancel</button>
+        <button class="btn btn-primary" id="saveShiftBtn">Save Shift</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRM MODAL -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirm Delete</h2>
+        <button class="modal-close" data-close="deleteModal" aria-label="Close">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="deleteMessage" style="color: var(--text-secondary); font-size: 0.9rem;">Are you sure you want to delete this record? This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="deleteModal">Cancel</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+</body>
+</html>
